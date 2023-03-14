@@ -1,0 +1,28 @@
+{
+  "name": "fullstack-backend-startcode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "NODE_ENV=development nodemon --exec ts-node app.ts",
+    "start:prod": "NODE_ENV=production nodemon --exec ts-node app.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "log4js": "^6.9.0",
+    "mongoose": "^7.0.1",
+    "nodemon": "^2.0.21"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.17",
+    "@types/morgan": "^1.9.4",
+    "@types/node": "^18.14.6",
+    "morgan": "^1.10.0",
+    "ts-node": "^10.9.1"
+  }
+}
