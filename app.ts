@@ -4,7 +4,7 @@ import express = require("express");
 import morgan = require('morgan');
 import logger from "./utility/logger";
 
-
+// Create Express server
 const app = express();
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -34,7 +34,6 @@ app.post("/", (req, res) => {
             data: jsonData
         })
 })
-
 
 const port = process.env.PORT;
 app.listen(port, () => {
