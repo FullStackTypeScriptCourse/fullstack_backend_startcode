@@ -5,6 +5,7 @@ import { NextFunction, Request, Response } from 'express';
 import morgan = require('morgan');
 import globalErrorHandler from './middleware/globalErrorHandler';
 import AppError from './utility/appError';
+import renameRoutes from './routes/renameRoutes';
 
 // Create Express server
 const app = express();
@@ -21,25 +22,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-app.get("/", (req, res) => {
-
-    res.status(200)
-        .json({
-            status: "success",
-            message: "Hello World"
-        })
-});
-
-app.post("/", (req, res) => {
-
-    const jsonData = req.body;
-    console.log()
-    res.status(201)
-        .json({
-            status: "success",
-            data: jsonData
-        })
-})
+app.use('/api/v1/rename', renameRoutes);
 
 const port = process.env.PORT;
 app.all('*', (req, res, next) => {
