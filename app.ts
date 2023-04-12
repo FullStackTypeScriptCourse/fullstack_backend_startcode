@@ -1,8 +1,10 @@
 import * as dotenv from 'dotenv'
 dotenv.config({path:'./config.env'});
 import express = require("express");
+import { NextFunction, Request, Response } from 'express';
 import morgan = require('morgan');
-import logger from "./utility/logger";
+import globalErrorHandler from './middleware/globalErrorHandler';
+import AppError from './utility/appError';
 
 // Create Express server
 const app = express();
@@ -14,6 +16,10 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json()); // Body parser for JSON data
 app.use(express.static(`${__dirname}/public`)); // Serve static files
 
+app.use((req: Request, res: Response, next: NextFunction) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
 
 app.get("/", (req, res) => {
 
@@ -36,8 +42,11 @@ app.post("/", (req, res) => {
 })
 
 const port = process.env.PORT;
-app.listen(port, () => {
-  console.log(`App running on port ${port}`);
+app.all('*', (req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
+
+
+app.use(globalErrorHandler);
 
 export default app;

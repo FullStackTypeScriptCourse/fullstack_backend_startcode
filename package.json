@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "types": "./types/express.d.ts",
   "scripts": {
     "start:dev": "NODE_ENV=development nodemon --exec ts-node app.ts",
     "start:prod": "NODE_ENV=production nodemon --exec ts-node app.ts"
